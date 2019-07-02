@@ -26,7 +26,6 @@
 		4A13525520282A51000F5FD5 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A13518420281768000F5FD5 /* Bolts.framework */; };
 		4A13525620282B4D000F5FD5 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97010FAC1630B18F00AB761E /* Parse.framework */; };
 		4A13525F20283603000F5FD5 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A13518820281768000F5FD5 /* Bolts.framework */; };
-		4A13528A202895ED000F5FD5 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A135289202895ED000F5FD5 /* Bolts.framework */; };
 		4A13528C20289BB6000F5FD5 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A13528B20289BB5000F5FD5 /* Bolts.framework */; };
 		4A13528F20289BD1000F5FD5 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A13528D20289BC3000F5FD5 /* Bolts.framework */; };
 		4A2C10B32152FEF200FA7D0E /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A13518820281768000F5FD5 /* Bolts.framework */; };
@@ -36,6 +35,9 @@
 		4AE33A121F5451AD0088DCA0 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AE33A111F5451AD0088DCA0 /* ViewController.m */; };
 		4AE33A171F5451AD0088DCA0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4AE33A161F5451AD0088DCA0 /* Assets.xcassets */; };
 		4AE33A1D1F5451AD0088DCA0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AE33A1C1F5451AD0088DCA0 /* main.m */; };
+		5155AF3E22CA393700ABFD5E /* PFNetworkActivityIndicatorManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 81DEF089199D555800D86A21 /* PFNetworkActivityIndicatorManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5155AF3F22CA394900ABFD5E /* PFNetworkActivityIndicatorManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 81DEF08A199D555800D86A21 /* PFNetworkActivityIndicatorManager.m */; };
+		51B3809222CA446E00982019 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A13518420281768000F5FD5 /* Bolts.framework */; };
 		702F3A0A1F1179D40043DD72 /* PFPolygon.h in Headers */ = {isa = PBXBuildFile; fileRef = 702F3A081F1179D40043DD72 /* PFPolygon.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		702F3A0B1F1179D40043DD72 /* PFPolygon.m in Sources */ = {isa = PBXBuildFile; fileRef = 702F3A091F1179D40043DD72 /* PFPolygon.m */; };
 		707095341F170EFB000C50EA /* PFPolygon.m in Sources */ = {isa = PBXBuildFile; fileRef = 702F3A091F1179D40043DD72 /* PFPolygon.m */; };
@@ -3647,7 +3649,7 @@
 				81C587171C3B0B22000063C6 /* CoreLocation.framework in Frameworks */,
 				81C587151C3B0B1C000063C6 /* AudioToolbox.framework in Frameworks */,
 				81C587131C3B0B18000063C6 /* UIKit.framework in Frameworks */,
-				4A13528A202895ED000F5FD5 /* Bolts.framework in Frameworks */,
+				51B3809222CA446E00982019 /* Bolts.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -6603,6 +6605,7 @@
 				816A64891C29E5A00029B197 /* PFUser+Synchronous.h in Headers */,
 				81BCB4C51B744626006659CB /* PFURLSessionDataTaskDelegate.h in Headers */,
 				81C9CA0719FECF5F00D514C5 /* PFRESTFileCommand.h in Headers */,
+				5155AF3E22CA393700ABFD5E /* PFNetworkActivityIndicatorManager.h in Headers */,
 				8166FCB11B503886003841A2 /* PFOfflineQueryLogic.h in Headers */,
 				812714891AE6F1270076AE8D /* ParseManager.h in Headers */,
 				8166FC9E1B503847003841A2 /* PFUserPrivate.h in Headers */,
@@ -8672,6 +8675,7 @@
 				8196D55E1B0AB64B000465A1 /* PFAnalyticsController.m in Sources */,
 				8196D5641B0AB661000465A1 /* PFAnalyticsUtilities.m in Sources */,
 				8166FC761B50376D003841A2 /* PFObjectController.m in Sources */,
+				5155AF3F22CA394900ABFD5E /* PFNetworkActivityIndicatorManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -8748,12 +8752,15 @@
 			buildSettings = {
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ENABLE_CODE_COVERAGE = NO;
+				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
 			};
 			name = Debug;
 		};
@@ -8763,12 +8770,15 @@
 			buildSettings = {
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ENABLE_CODE_COVERAGE = NO;
+				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				SWIFT_COMPILATION_MODE = wholemodule;
 			};
 			name = Release;

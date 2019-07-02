@@ -58,6 +58,8 @@
 #elif PF_TARGET_OS_OSX
 
 #import <Parse/PFInstallation.h>
+#import <Parse/PFNetworkActivityIndicatorManager.h>
+#import <Parse/PFInstallation.h>
 #import <Parse/PFPush.h>
 #import <Parse/PFPush+Synchronous.h>
 #import <Parse/PFPush+Deprecated.h>

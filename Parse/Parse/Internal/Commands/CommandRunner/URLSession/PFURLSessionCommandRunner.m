@@ -268,11 +268,21 @@
     configuration.HTTPCookieAcceptPolicy = NSHTTPCookieAcceptPolicyNever;
     configuration.HTTPShouldSetCookies = NO;
 
+#if !TARGET_OS_UIKITFORMAC
+    
     // Completely disable caching of responses for security reasons.
     configuration.URLCache = [[NSURLCache alloc] initWithMemoryCapacity:[NSURLCache sharedURLCache].memoryCapacity
                                                            diskCapacity:0
                                                                diskPath:nil];
 
+#else
+    
+    configuration.URLCache=[NSURLCache sharedURLCache];
+#endif
+    
+    
+    
+    
     NSBundle *bundle = [NSBundle mainBundle];
     NSDictionary *headers = [PFCommandURLRequestConstructor defaultURLRequestHeadersForApplicationId:applicationId
                                                                                            clientKey:clientKey

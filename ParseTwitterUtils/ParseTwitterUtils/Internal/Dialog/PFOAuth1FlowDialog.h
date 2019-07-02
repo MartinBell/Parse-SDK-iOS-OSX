@@ -9,6 +9,7 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#define UIWebView NotDefined
 
 @class PFOAuth1FlowDialog;
 
