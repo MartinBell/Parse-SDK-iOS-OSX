@@ -12,7 +12,7 @@
 
 #import <Accounts/Accounts.h>
 #import <Social/Social.h>
-#import <Twitter/Twitter.h>
+#import <TwitterCore/TwitterCore.h>
 
 #import <Bolts/BFExecutor.h>
 #import <Bolts/BFTaskCompletionSource.h>
@@ -409,7 +409,7 @@
         [source setResult:nil];
         return source.task;
     }
-
+   
     ACAccountType *twitterType = [_accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
     [_accountStore requestAccessToAccountsWithType:twitterType options:nil completion:^(BOOL granted, NSError *error) {
         if (error) {

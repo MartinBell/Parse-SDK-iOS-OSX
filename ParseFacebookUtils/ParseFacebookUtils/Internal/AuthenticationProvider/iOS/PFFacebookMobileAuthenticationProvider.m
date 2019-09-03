@@ -54,7 +54,7 @@
     }
 
     BFTaskCompletionSource *taskCompletionSource = [BFTaskCompletionSource taskCompletionSource];
-    FBSDKLoginManagerRequestTokenHandler resultHandler = ^(FBSDKLoginManagerLoginResult *result, NSError *error) {
+    FBSDKLoginManagerLoginResultBlock resultHandler = ^(FBSDKLoginManagerLoginResult *result, NSError *error) {
         if (result.isCancelled) {
             [taskCompletionSource cancel];
         } else if (error) {
@@ -64,16 +64,26 @@
         }
     };
     if (publishPermissions) {
-        [self.loginManager logInWithPublishPermissions:publishPermissions
+    
+        [self.loginManager logInWithPermissions:publishPermissions
                                     fromViewController:viewController
                                                handler:resultHandler];
     } else {
-        [self.loginManager logInWithReadPermissions:readPermissions
+        [self.loginManager logInWithPermissions:readPermissions
                                  fromViewController:viewController
                                             handler:resultHandler];
     }
     return taskCompletionSource.task;
 }
+
+/*
+ - (void)logInWithPermissions:(NSArray<NSString *> *)permissions
+ fromViewController:(nullable UIViewController *)fromViewController
+ handler:(nullable FBSDKLoginManagerLoginResultBlock)handler
+ NS_SWIFT_NAME(logIn(permissions:from:handler:));
+ 
+ 
+ */
 
 ///--------------------------------------
 #pragma mark - PFUserAuthenticationDelegate

@@ -54,7 +54,8 @@
                                                               handler:alertActionHandler]];
         }
 
-        UIWindow *keyWindow = [UIApplication sharedApplication].keyWindow;
+        UIWindow *keyWindow = [[[UIApplication sharedApplication] delegate] window];
+
         UIViewController *viewController = keyWindow.rootViewController;
         while (viewController.presentedViewController) {
             viewController = viewController.presentedViewController;

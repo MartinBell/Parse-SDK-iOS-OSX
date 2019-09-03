@@ -77,7 +77,14 @@ typedef void (^PFOAuth1FlowDialogCompletion)(BOOL succeeded, NSURL *url, NSError
 
     UILabel *_titleLabel;
     UIButton *_closeButton;
+    
+    #if !TARGET_OS_UIKITFORMAC
+    
     UIWebView *_webView;
+    
+    #endif
+    
+    
     UIActivityIndicatorView *_activityIndicator;
 
     UIInterfaceOrientation _orientation;

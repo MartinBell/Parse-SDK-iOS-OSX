@@ -35,7 +35,7 @@
     OCMStub([mockedLoginManager logInWithReadPermissions:@[ @"read" ]
                                       fromViewController:OCMOCK_ANY
                                                  handler:OCMOCK_ANY]).andDo(^(NSInvocation *invocation) {
-        __unsafe_unretained FBSDKLoginManagerRequestTokenHandler handler = nil;
+        __unsafe_unretained FBSDKLoginManagerLoginResultBlock handler = nil;
         [invocation getArgument:&handler atIndex:4];
 
         FBSDKAccessToken *token = [[FBSDKAccessToken alloc] initWithTokenString:@"token"
@@ -76,7 +76,7 @@
     OCMStub([mockedLoginManager logInWithPublishPermissions:@[ @"publish" ]
                                          fromViewController:OCMOCK_ANY
                                                     handler:OCMOCK_ANY]).andDo(^(NSInvocation *invocation) {
-        __unsafe_unretained FBSDKLoginManagerRequestTokenHandler handler = nil;
+        __unsafe_unretained FBSDKLoginManagerLoginResultBlock handler = nil;
         [invocation getArgument:&handler atIndex:4];
 
         FBSDKAccessToken *token = [[FBSDKAccessToken alloc] initWithTokenString:@"token"
@@ -128,7 +128,7 @@
     OCMStub([mockedLoginManager logInWithPublishPermissions:@[ @"publish" ]
                                          fromViewController:OCMOCK_ANY
                                                     handler:OCMOCK_ANY]).andDo(^(NSInvocation *invocation) {
-        __unsafe_unretained FBSDKLoginManagerRequestTokenHandler handler = nil;
+        __unsafe_unretained FBSDKLoginManagerLoginResultBlock handler = nil;
         [invocation getArgument:&handler atIndex:4];
 
         FBSDKLoginManagerLoginResult *result = [[FBSDKLoginManagerLoginResult alloc] initWithToken:nil
@@ -158,7 +158,7 @@
     OCMStub([mockedLoginManager logInWithPublishPermissions:@[ @"publish" ]
                                          fromViewController:OCMOCK_ANY
                                                     handler:OCMOCK_ANY]).andDo(^(NSInvocation *invocation) {
-        __unsafe_unretained FBSDKLoginManagerRequestTokenHandler handler = nil;
+        __unsafe_unretained FBSDKLoginManagerLoginResultBlock handler = nil;
         [invocation getArgument:&handler atIndex:4];
 
         handler(nil, expectedError);
@@ -182,7 +182,7 @@
     OCMStub([mockedLoginManager logInWithPublishPermissions:@[ @"publish" ]
                                          fromViewController:OCMOCK_ANY
                                                     handler:OCMOCK_ANY]).andDo(^(NSInvocation *invocation) {
-        __unsafe_unretained FBSDKLoginManagerRequestTokenHandler handler = nil;
+        __unsafe_unretained FBSDKLoginManagerLoginResultBlock handler = nil;
         [invocation getArgument:&handler atIndex:4];
 
         FBSDKAccessToken *token = [[FBSDKAccessToken alloc] initWithTokenString:nil

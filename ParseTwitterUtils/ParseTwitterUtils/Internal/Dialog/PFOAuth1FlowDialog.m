@@ -117,12 +117,15 @@ static CGFloat PFTFloatRound(CGFloat value, NSRoundingMode mode) {
     if ([params count] > 0) {
         NSMutableArray *parameterPairs = [NSMutableArray array];
         [params enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
-            CFStringRef escapedString = CFURLCreateStringByAddingPercentEscapes(
-                                                                                NULL, /* allocator */
+            
+            NSString* escapedString=[obj stringByAddingPercentEncodingWithAllowedCharacters:URLPathAllowedCharacter];
+            
+           /* CFStringRef escapedString = CFURLCreateStringByAddingPercentEscapes(
+                                                                                NULL, / * allocator */
                                                                                 (CFStringRef)obj,
-                                                                                NULL, /* charactersToLeaveUnescaped */
+                                                                                NULL, / * charactersToLeaveUnescaped * /
                                                                                 (CFStringRef)@"!*'();:@&=+$,/?%#[]",
-                                                                                kCFStringEncodingUTF8);
+                                                                                kCFStringEncodingUTF8);*/
             [parameterPairs addObject:[NSString stringWithFormat:@"%@=%@", key, CFBridgingRelease(escapedString)]];
         }];
 
@@ -204,11 +207,15 @@ static CGFloat PFTFloatRound(CGFloat value, NSRoundingMode mode) {
         _titleLabel.font = [UIFont boldSystemFontOfSize:titleLabelFontSize];
         [self addSubview:_titleLabel];
 
+        #if !TARGET_OS_UIKITFORMAC
+        
         _webView = [[UIWebView alloc] initWithFrame:CGRectZero];
         _webView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         _webView.delegate = self;
         [self addSubview:_webView];
 
+        #endif
+        
         _activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:
                               UIActivityIndicatorViewStyleWhiteLarge];
         _activityIndicator.color = [UIColor grayColor];
@@ -240,8 +247,9 @@ static CGFloat PFTFloatRound(CGFloat value, NSRoundingMode mode) {
 #pragma mark Dealloc
 
 - (void)dealloc {
+     #if !TARGET_OS_UIKITFORMAC
     _webView.delegate = nil;
-
+#endif
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
@@ -252,7 +260,11 @@ static CGFloat PFTFloatRound(CGFloat value, NSRoundingMode mode) {
     [super drawRect:rect];
 
     [[self class] _fillRect:self.bounds withColorComponents:PFOAuth1FlowDialogBorderGreyColorComponents radius:10.0f];
+    
+     #if !TARGET_OS_UIKITFORMAC
     [[self class] _strokeRect:_webView.frame withColorComponents:PFOAuth1FlowDialogBorderBlackColorComponents];
+    #endif
+
 }
 
 - (void)layoutSubviews {
@@ -281,6 +293,9 @@ static CGFloat PFTFloatRound(CGFloat value, NSRoundingMode mode) {
     closeButtonFrame.origin.x = CGRectGetMaxX(contentRect) - CGRectGetWidth(closeButtonFrame);
     _closeButton.frame = closeButtonFrame;
 
+    
+     #if !TARGET_OS_UIKITFORMAC
+    
     CGRect webViewFrame = contentRect;
     if (!_showingKeyboard || PFOAuth1FlowDialogIsDevicePad() || UIInterfaceOrientationIsPortrait(_orientation)) {
         webViewFrame.origin.y = CGRectGetMaxY(titleLabelFrame) + PFOAuth1FlowDialogTitleInsets.bottom;
@@ -290,6 +305,8 @@ static CGFloat PFTFloatRound(CGFloat value, NSRoundingMode mode) {
 
     [_activityIndicator sizeToFit];
     _activityIndicator.center = _webView.center;
+
+    #endif
 }
 
 #pragma mark -
@@ -404,11 +421,20 @@ static CGFloat PFTFloatRound(CGFloat value, NSRoundingMode mode) {
     _loadingURL = [[self class] _urlFromBaseURL:url queryParameters:parameters];
 
     NSURLRequest *request = [NSURLRequest requestWithURL:_loadingURL];
+    
+    #if !TARGET_OS_UIKITFORMAC
+    
     [_webView loadRequest:request];
+    
+    
+    #endif
 }
 
 #pragma mark -
 #pragma mark UIWebViewDelegate
+
+
+#if !TARGET_OS_UIKITFORMAC
 
 - (BOOL)webView:(UIWebView *)webView
 shouldStartLoadWithRequest:(NSURLRequest *)request
@@ -450,6 +476,8 @@ shouldStartLoadWithRequest:(NSURLRequest *)request
         [self _dismissWithSuccess:NO url:nil error:error];
     }
 }
+
+#endif
 
 #pragma mark -
 #pragma mark Observers
